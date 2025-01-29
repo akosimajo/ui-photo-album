@@ -1,4 +1,4 @@
-import {Avatar, Box, Button, Card, CardContent, Typography,} from "@mui/material";
+import { Avatar, Box, Button, Card, CardContent, Typography } from "@mui/material";
 import Images from "./Images";
 import HeaderMenu from "./HeaderMenu";
 
@@ -28,77 +28,56 @@ const Dashboard = () => {
 
 	const faceRows = splitToColumn(faces, 3);
 
+	const buttonStyles = {
+		backgroundColor: "#872434",
+		"&:hover": { backgroundColor: "#7f1d1d" },
+		color: "#fff",
+	};
+
+	const CardSection = ({ title, items, renderItem }) => (
+		<Card className="bg-white shadow-lg !rounded-lg">
+			<CardContent>
+				<Button fullWidth type="submit" variant="contained" sx={buttonStyles}>
+					{title}
+				</Button>
+				{items.map((item, index) => (
+					<Box key={index}>{renderItem(item)}</Box>
+				))}
+			</CardContent>
+		</Card>
+	);
+
 	return (
 		<div className="min-h-screen bg-white">
-			<HeaderMenu/>
-			<Images/>
-			<div
-				className="p-4 grid grid-cols-1 lg:grid-cols-4 gap-12 w-[75%]  max-w-full"
-				style={{margin: "0px auto"}}
-			>
+			<HeaderMenu />
+			<Images />
+			<div className="p-4 grid grid-cols-1 lg:grid-cols-4 gap-12 w-[75%] max-w-full" style={{ margin: "0px auto" }}>
 				{/* Albums */}
-				<Card className="bg-white shadow-lg !rounded-lg">
-					<CardContent>
-						<Button
-							fullWidth
-							type="submit"
-							variant="contained"
-							sx={{
-								backgroundColor: "#872434",
-								"&:hover": {
-									backgroundColor: "#7f1d1d",
-								},
-								color: "#fff",
-							}}
-						>
-							Albums
-						</Button>
-						{albums.map((album, index) => (
-							<Typography key={index} variant="body2" className="p-1">
-								{album}
-							</Typography>
-						))}
-					</CardContent>
-				</Card>
+				<CardSection
+					title="Albums"
+					items={albums}
+					renderItem={(album) => (
+						<Typography variant="body2" className="p-1">
+							{album}
+						</Typography>
+					)}
+				/>
+
 				{/* Tags */}
-				<Card className="bg-white shadow-lg !rounded-lg">
-					<CardContent>
-						<Button
-							fullWidth
-							type="submit"
-							variant="contained"
-							sx={{
-								backgroundColor: "#872434",
-								"&:hover": {
-									backgroundColor: "#7f1d1d",
-								},
-								color: "#fff",
-							}}
-						>
-							Tags
-						</Button>
-						{tags.map((tag, index) => (
-							<Typography key={index} variant="body2" className="p-1">
-								{tag}
-							</Typography>
-						))}
-					</CardContent>
-				</Card>
+				<CardSection
+					title="Tags"
+					items={tags}
+					renderItem={(tag) => (
+						<Typography variant="body2" className="p-1">
+							{tag}
+						</Typography>
+					)}
+				/>
+
 				{/* Faces */}
 				<Card className="bg-white shadow-lg !rounded-lg">
 					<CardContent>
-						<Button
-							fullWidth
-							type="submit"
-							variant="contained"
-							sx={{
-								backgroundColor: "#872434",
-								"&:hover": {
-									backgroundColor: "#7f1d1d",
-								},
-								color: "#fff",
-							}}
-						>
+						<Button fullWidth type="submit" variant="contained" sx={buttonStyles}>
 							Faces
 						</Button>
 						{faceRows.map((row, rowIndex) => (
@@ -113,40 +92,13 @@ const Dashboard = () => {
 						))}
 					</CardContent>
 				</Card>
+
 				{/* Upload Photos */}
 				<Card className="bg-white shadow-lg !rounded-lg">
 					<CardContent>
-						<Button
-							fullWidth
-							type="submit"
-							variant="contained"
-							sx={{
-								backgroundColor: "#872434",
-								"&:hover": {
-									backgroundColor: "#7f1d1d",
-								},
-								color: "#fff",
-							}}
-						>
+						<Button fullWidth type="submit" variant="contained" sx={buttonStyles}>
 							Upload Photos
 						</Button>
-						{["Batch Folder", "Folder", "Photo"].map((text, index) => (
-							<Box key={index} mb={1}>
-								<Button
-									className="p1 underline text-custom-maroon hover:cursor-pointer hover:underline"
-									style={{
-										padding: 10,
-										minWidth: "auto",
-										background: "none",
-										textTransform: "none",
-										boxShadow: "none",
-										fontSize: "1.25rem",
-									}}
-								>
-									{text}
-								</Button>
-							</Box>
-						))}
 					</CardContent>
 				</Card>
 			</div>
